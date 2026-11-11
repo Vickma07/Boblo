@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Boblo: every call answered</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--ac:#2cc38f;--ad:#0b6b50;--ik:#0f1317;--pa:#f7f8f8;--mu:#5a636b;--ln:#dfe4e3;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-behavior:smooth;scroll-padding-top:calc(64px + env(safe-area-inset-top,0px))}
+*{box-sizing:border-box}
+body{margin:0;background:var(--pa);color:var(--ik);font:17px/1.6 Manrope,system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:#fff;z-index:30}
+h1,h2,h3{margin:0;letter-spacing:-.02em;line-height:1.1;font-weight:800}
+h1{font-size:clamp(36px,6vw,64px)}h2{font-size:clamp(28px,4vw,42px);margin-bottom:26px}
+p{margin:0 0 14px;max-width:58ch}
+.w{max-width:1100px;margin:auto;padding:0 20px}.band{padding:92px 0}
+.bl{background:#12171c;color:#fff}.ye{background:#edf0ef}.ik{background:#0b0e11;color:#fff}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:#fff;border-bottom:1px solid var(--ln)}
+header .w{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-weight:800;font-size:25px;letter-spacing:-.03em;color:var(--ik);text-decoration:none}
+.btn{display:inline-block;font:700 16px Manrope,system-ui,sans-serif;background:var(--ac);color:#06241a;border:1px solid transparent;border-radius:8px;padding:13px 22px;text-decoration:none;cursor:pointer;transition:filter .15s,transform .15s}
+.btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.btn.bk,.btn.bb{background:var(--ik);color:#fff}
+.bl .btn.bk{background:transparent;color:#fff;border-color:#47525a}
+.btn.sm{padding:8px 16px;font-size:14px}
+:focus-visible{outline:3px solid var(--ac);outline-offset:3px}
+.fine{font-size:14px;color:var(--mu);margin-top:12px}.bl .fine,.ik .fine{color:#8d9896}
+.hero{display:grid;gap:48px;align-items:center}
+@media(min-width:900px){.hero{grid-template-columns:1.1fr .9fr}}
+.row{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.hero p{font-size:19px;margin-top:20px;color:#b8c2c0}
+.con{background:#fff;color:var(--ik);border-radius:14px;box-shadow:0 24px 60px rgba(0,0,0,.4);padding:22px}
+.con .fine{color:var(--mu)}
+.ct{display:flex;justify-content:space-between;font-weight:600;font-size:14px;color:var(--mu)}.ct label{cursor:pointer}
+.tabs{display:flex;gap:6px;margin:14px 0;flex-wrap:wrap}
+.tabs button{font:600 13px Manrope,sans-serif;border:1px solid var(--ln);background:#fff;color:var(--ik);border-radius:99px;padding:6px 13px;cursor:pointer}
+.tabs button.a{background:var(--ik);color:#fff;border-color:var(--ik)}
+.who{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--ln);padding-top:14px}
+.who span{font-size:14px;color:var(--mu)}
+.wave{display:flex;align-items:center;gap:3px;height:44px;margin:8px 0}
+.wave i{flex:1;height:4px;background:#9aa5a2;border-radius:2px;opacity:.4}
+.wave.on i{opacity:1;animation:wv .5s infinite alternate ease-in-out}.wave.b i{background:var(--ad)}
+@keyframes wv{to{height:40px}}
+#tr{min-height:180px;max-height:250px;overflow-y:auto;margin-bottom:14px;font-size:15.5px}
+.l{margin:0 0 8px;padding:9px 13px;border-left:3px solid #9aa5a2;background:#f1f3f3;border-radius:6px;max-width:none;animation:in .3s}
+.l.b{border-color:var(--ad);background:#e7f6ef}.l small{display:block;font-weight:800;font-size:12px;color:var(--mu)}
+.sum{border:1px solid var(--ln);border-radius:8px;background:#fafbfb;padding:12px 14px;font-size:15px;animation:in .4s}.sum b{color:var(--ad)}
+@keyframes in{from{opacity:0;transform:translateY(6px)}}
+.call{width:100%;text-align:center}
+.rows>div{display:grid;gap:4px 40px;padding:24px 0;border-top:1px solid var(--ln)}
+.rows>div:last-child{border-bottom:1px solid var(--ln)}
+.rows b{font-size:22px;line-height:1.2;letter-spacing:-.01em}.rows span{color:var(--mu)}
+@media(min-width:760px){.rows>div{grid-template-columns:1fr 1fr}}
+.tl{display:grid;grid-template-columns:repeat(4,1fr);position:relative;margin:34px 0 10px}
+.tl::before{content:"";position:absolute;left:12.5%;right:12.5%;top:27px;height:2px;background:#2a3239}
+.tl i{position:absolute;left:12.5%;top:27px;height:2px;background:var(--ac);transition:width .5s;width:0}
+.step{position:relative;background:none;border:0;color:#fff;font:600 14px Manrope,system-ui,sans-serif;cursor:pointer;text-align:center;padding:0 2px}
+.step span{display:grid;place-items:center;width:56px;height:56px;margin:0 auto 8px;border-radius:50%;background:#12171c;border:2px solid #2a3239;font-size:23px;transition:.3s}
+.step.a span{background:var(--ac);border-color:var(--ac);transform:scale(1.1);box-shadow:0 0 0 6px rgba(44,195,143,.2)}
+.step.hint::after{content:"👆";position:absolute;left:55%;top:40px;font-size:26px;animation:tap .8s infinite}
+@keyframes tap{50%{transform:translateY(-7px)}}
+.done .step:not(.a) span{animation:pl 2s infinite}@keyframes pl{50%{border-color:var(--ac)}}
+#sp{background:#fff;color:var(--ik);border-radius:14px;padding:26px;min-height:190px;margin-top:26px;animation:in .4s}
+#sp .t{background:#f1f3f3;border-left:3px solid #9aa5a2;border-radius:6px;padding:8px 12px;margin-bottom:8px;max-width:520px}#sp .t.b{background:#e7f6ef;border-color:var(--ad)}
+.chip{display:inline-block;background:#e7f6ef;color:var(--ad);font-weight:700;font-size:14px;padding:3px 12px;border-radius:99px;margin:6px 6px 0 0}
+.nav{display:flex;gap:10px;margin-top:22px}.nav button{font:600 15px Manrope,sans-serif;background:none;color:#fff;border:1px solid #2a3239;border-radius:8px;padding:8px 18px;cursor:pointer}
+.calc{display:grid;gap:40px}@media(min-width:860px){.calc{grid-template-columns:1fr 1fr;align-items:center}}
+label{display:block;font-weight:600;margin-bottom:22px}label b{float:right}
+input[type=range]{width:100%;accent-color:var(--ad);margin-top:8px}
+.big{font-size:clamp(52px,10vw,96px);font-weight:800;letter-spacing:-.04em;line-height:1;color:var(--ad)}
+.qs{display:grid;gap:34px}@media(min-width:860px){.qs{grid-template-columns:repeat(3,1fr);gap:40px}}
+.q{border-top:3px solid var(--ad);padding-top:16px;font-size:clamp(20px,2.2vw,24px);line-height:1.3;font-weight:600}
+.q small{display:block;font-size:15px;font-weight:400;color:var(--mu);margin-top:12px}
+.pr{display:grid;gap:18px}@media(min-width:860px){.pr{grid-template-columns:repeat(3,1fr)}}
+.pc{border:1px solid var(--ln);border-radius:14px;padding:30px;background:#fff}
+.pc.f{background:var(--ik);color:#fff;border-color:var(--ik);box-shadow:0 24px 50px rgba(0,0,0,.2)}
+.pc p,.pc li{color:var(--mu)}.pc.f p,.pc.f li{color:#c5cecc}
+.pc .pz{font-size:46px;font-weight:800;letter-spacing:-.03em}.pc .pz small{font-size:16px;font-weight:400;opacity:.7}
+.pc ul{padding-left:20px;margin:14px 0 24px}.pc li{margin-bottom:4px}
+.faq{display:grid;gap:30px}@media(min-width:860px){.faq{grid-template-columns:1fr 1.3fr}}
+details{border-top:1px solid var(--ln);padding:16px 0}details:last-of-type{border-bottom:1px solid var(--ln)}
+summary{cursor:pointer;font-weight:700;font-size:19px}details p{margin:10px 0 0;color:var(--mu)}
+.join input{font:600 17px Manrope,sans-serif;padding:13px 16px;border:1px solid #47525a;background:#1b2228;color:#fff;border-radius:8px;width:min(340px,100%);margin-right:10px;margin-bottom:12px}
+#fl{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:15;transform:translateY(140px);transition:transform .35s;box-shadow:0 8px 24px rgba(0,0,0,.3)}#fl.s{transform:none}
+footer{font-size:14px;padding:26px 0;color:#8d9896}
+@media(max-width:560px){.step{font-size:11px}.step span{width:46px;height:46px}.tl::before,.tl i{top:22px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<header><div class="w"><a class="logo" href="#top">Boblo<span style="color:var(--ac)">.</span></a><a class="btn sm" href="#join">Get early access</a></div></header>
+<main id="top">
+<section class="band bl"><div class="w hero"><div>
+<h1>Every call answered. Every lead qualified. Zero payroll.</h1>
+<p>Boblo picks up when your team can’t, asks the right questions, and hands you leads that are ready to buy. Nights, weekends, 6:02pm on a Friday.</p>
+<div class="row"><a class="btn" href="#join">Get early access</a><button class="btn bk" id="hear">Hear a live call</button></div>
+<div class="fine">Free to join. Takes 30 seconds.</div></div>
+<div class="con" id="con"><div class="ct"><span id="cs">Ready to ring</span><label><input type="checkbox" id="vo" checked> Voice on</label></div>
+<div class="tabs" id="tabs"></div>
+<div class="who"><b id="cn"></b><span id="cp"></span></div>
+<div class="wave" id="wv"></div><div id="tr" aria-live="polite"></div>
+<button class="btn call" id="cb">Answer call</button>
+<div class="fine">No sound? Open this page directly in Chrome, not inside another app. Voices come from your device.</div></div></div></section>
+
+<section class="band"><div class="w"><h2>Your phone is quietly costing you customers.</h2>
+<div class="rows"><div><b>The call you missed at 6:02pm</b><span>No voicemail. They rang your competitor next.</span></div>
+<div><b>The hot lead buried under price-checkers</b><span>Ready to buy today, waiting in the same queue as “just browsing.”</span></div>
+<div><b>The “I’ll call you back” that never happened</b><span>Monday’s enquiry. Wednesday’s silence.</span></div>
+<div><b>Hours spent asking the same five questions</b><span>Name, number, need, budget. Again and again.</span></div></div>
+<div class="row"><a class="btn bb" href="#join">Stop losing them</a></div></div></section>
+
+<section class="band ik" id="how"><div class="w"><h2>Watch one call turn into a customer.</h2>
+<div id="stw"><div class="tl" id="st"><i id="pg"></i></div><div id="sp"></div>
+<div class="nav"><button id="pv">Back</button><button id="nx">Next</button></div></div>
+<div class="row"><a class="btn" href="#join">Put this on my phones</a></div></div></section>
+
+<section class="band ye"><div class="w"><h2>What is your phone really costing you?</h2>
+<div class="calc"><div><label>Calls per month <b id="v1"></b><input type="range" id="r1" min="50" max="3000" step="50" value="800"></label>
+<label>Average minutes per call <b id="v2"></b><input type="range" id="r2" min="1" max="10" value="3"></label>
+<label>Monthly spend on call handling <b id="v3"></b><input type="range" id="r3" min="500" max="10000" step="100" value="3000"></label></div>
+<div><p style="margin:0">You could take back</p><div class="big" id="sv">$0</div><p id="pl" style="margin:12px 0 20px"></p><a class="btn bk" href="#join">Take that money back</a><div class="fine">An estimate from the plan prices below, not a guarantee.</div></div></div></div></section>
+
+<section class="band"><div class="w"><h2>Don’t take our word for it.</h2>
+<div class="qs"><div class="q">“We stopped losing weekend enquiries in the first week.”<small>Tunde A., property manager</small></div>
+<div class="q">“It asks what my team used to ask. Leads arrive already sorted.”<small>Mercy K., clinic owner</small></div>
+<div class="q">“I didn’t need a night receptionist. Callers didn’t notice.”<small>Daniel R., contractor</small></div></div>
+<div class="fine">Sample quotes for this concept. Replace with real customers.</div></div></section>
+
+<section class="band" style="padding-top:0"><div class="w"><h2>Pick your size. Skip the headache.</h2>
+<div class="pr"><div class="pc"><h3>Launch</h3><div class="pz">$79<small>/month</small></div><p>Small teams starting out.</p><ul><li>300 AI call minutes</li><li>1 agent, 1 location</li><li>Basic lead qualification</li><li>Call summaries</li></ul><a class="btn" href="#join">Start small</a></div>
+<div class="pc f"><h3>Growth</h3><div class="pz">$199<small>/month</small></div><p>Busy businesses that follow up.</p><ul><li>1,500 AI call minutes</li><li>3 agents</li><li>Advanced qualification</li><li>Follow-ups and escalation</li><li>CRM and calendar, up to 3 each</li></ul><a class="btn" href="#join">Go Growth</a></div>
+<div class="pc"><h3>Scale</h3><div class="pz">$499<small>/month</small></div><p>Multiple teams and locations.</p><ul><li>5,000 AI call minutes</li><li>10 agents, 10 locations</li><li>Custom qualification</li><li>Priority support</li></ul><a class="btn" href="#join">Scale it up</a></div></div></div></section>
+
+<section class="band" style="padding-top:0"><div class="w faq"><h2>Quick answers.</h2><div>
+<details><summary>What does Boblo do?</summary><p>It answers incoming calls, works out what the caller wants, asks your qualification questions, and gives your team a lead that’s ready to act on.</p></details>
+<details><summary>Can a person take over?</summary><p>Yes. You set the handoff rules, and Boblo passes the call to your team when it needs a human.</p></details>
+<details><summary>What if it doesn’t know the answer?</summary><p>It doesn’t guess. Anything it can’t answer with confidence goes to your team.</p></details>
+<details><summary>How does early access work?</summary><p>Share your email and we’ll reach out as spots open.</p></details>
+<div class="row"><a class="btn bb" href="#join">Still curious? Save your spot and ask us anything</a></div></div></div></section>
+
+<section class="band bl join" id="join"><div class="w"><h2 style="max-width:16em">Your next customer is calling right now. Will anyone pick up?</h2>
+<input id="em" type="email" placeholder="you@company.com" aria-label="Email"><button class="btn" id="go">Pick up every call</button>
+<div class="fine" id="msg">Free to join. Takes 30 seconds.</div></div></section>
+</main>
+<footer class="ik"><div class="w">Boblo is a concept redesign built for feedback. Quotes, calls and figures are sample content.</div></footer>
+<a class="btn" id="fl" href="#join">Get early access</a>
+<script>
+var $=function(s){return document.querySelector(s)},AC;
+function ring(n){try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();AC.resume();var t=AC.currentTime;for(var i=0;i<n;i++)[0,.5].forEach(function(o){[440,480].forEach(function(f){var s=t+i*2+o,os=AC.createOscillator(),g=AC.createGain();os.frequency.value=f;os.connect(g);g.connect(AC.destination);g.gain.setValueAtTime(0,s);g.gain.linearRampToValueAtTime(.08,s+.02);g.gain.setValueAtTime(.08,s+.4);g.gain.linearRampToValueAtTime(0,s+.45);os.start(s);os.stop(s+.5)})})}catch(e){}}
+/* voices */
+var V=[],SS='speechSynthesis' in window;
+function lv(){V=speechSynthesis.getVoices().filter(function(v){return /^en/i.test(v.lang)})}
+if(SS){lv();speechSynthesis.onvoiceschanged=lv}
+function pick(b){if(!V.length)return null;var f=V.filter(function(v){return /female|samantha|zira|aria|jenny|karen|moira|tessa|serena/i.test(v.name)}),m=V.filter(function(v){return /daniel|david|alex|guy|fred|tom|james|male/i.test(v.name)&&!/female/i.test(v.name)});return b?(f[0]||V[0]):(m[0]||V[V.length>1?1:0])}
+function say(t,b,cb){var fin=false,tm,d=function(){if(fin)return;fin=true;clearTimeout(tm);cb()};
+if(!$('#vo').checked||!SS){tm=setTimeout(d,Math.max(1500,t.length*60));return}
+var u=new SpeechSynthesisUtterance(t),v=pick(b);if(v)u.voice=v;u.pitch=b?1.15:.75;u.rate=1;u.onend=d;u.onerror=d;tm=setTimeout(d,t.length*95+3000);speechSynthesis.speak(u)}
+/* call */
+var SC=[{k:'Rental enquiry',n:'Amara Okafor',p:'+1 555 014 2290',L:[['b','Thanks for calling Acme Property, this is Boblo. How can I help?'],['c','Hi, I’m looking for a three-bedroom flat to rent.'],['b','Happy to help. Which area, and what’s your monthly budget?'],['c','Riverside, and up to two thousand dollars.'],['b','Got it. When would you like to move in?'],['c','Next month, if possible.'],['b','Thanks, Amara. I’ve booked a callback with our agent today at four thirty. You’ll get a text to confirm.']],S:[['Need','3-bed rental, Riverside'],['Budget','Up to $2,000'],['Timing','Next month'],['Next step','Agent callback, 4:30 PM']]},
+{k:'Clinic booking',n:'Mercy Kalu',p:'+1 555 018 7741',L:[['b','Good evening, Brightside Clinic, this is Boblo. How can I help?'],['c','I need to see someone about a recurring back pain.'],['b','I’m sorry to hear that. Is this a new appointment, and do you have insurance?'],['c','New appointment. Yes, I’m insured.'],['b','Thank you. The earliest slot is Thursday at nine. Shall I hold it for you?'],['c','Yes please.'],['b','Done. I’ve held Thursday at nine, and a nurse will confirm by text tonight.']],S:[['Need','New patient, back pain'],['Insurance','Yes'],['Booked','Thursday, 9:00 AM'],['Next step','Nurse confirms tonight']]},
+{k:'Roof quote',n:'Daniel Reyes',p:'+1 555 013 9068',L:[['b','Hello, Summit Roofing, this is Boblo. What can I do for you?'],['c','My roof is leaking after the storm.'],['b','That sounds urgent. Is water coming inside right now?'],['c','Yes, in the kitchen.'],['b','Understood. Can I get your address so we can send someone?'],['c','Twelve Cedar Lane.'],['b','Thank you, Daniel. I’ve marked this urgent, and a technician will call you within thirty minutes.']],S:[['Need','Storm roof leak'],['Priority','Urgent'],['Address','12 Cedar Lane'],['Next step','Technician call in 30 min']]}];
+var sc=SC[0],run=0,act=false,wv=$('#wv'),tr=$('#tr'),cb=$('#cb');
+for(var j=0;j<28;j++){var bi=document.createElement('i');bi.style.animationDelay=(j%7)*70+'ms';bi.style.animationDuration=(380+(j*53)%320)+'ms';wv.appendChild(bi)}
+function setSc(i){stop();sc=SC[i];$('#cn').textContent=sc.n;$('#cp').textContent=sc.p;tr.innerHTML='';$('#cs').textContent='Ready to ring';[].forEach.call($('#tabs').children,function(b,k){b.classList.toggle('a',k===i)})}
+SC.forEach(function(s,i){var b=document.createElement('button');b.textContent=s.k;b.onclick=function(){setSc(i)};$('#tabs').appendChild(b)});setSc(0);
+function stop(){run++;act=false;if(SS)speechSynthesis.cancel();wv.className='wave';cb.textContent='Answer call'}
+function start(){if(act){stop();$('#cs').textContent='Call ended';return}
+stop();act=true;var id=run;cb.textContent='End call';tr.innerHTML='';$('#cs').textContent='Ringing…';ring(1);
+setTimeout(function(){if(id!==run)return;$('#cs').textContent='Connected';nx(0,id)},2400)}
+function nx(i,id){if(id!==run)return;if(i>=sc.L.length){fin();return}var l=sc.L[i],b=l[0]==='b';
+tr.insertAdjacentHTML('beforeend','<p class="l '+(b?'b':'c')+'"><small>'+(b?'Boblo':sc.n.split(' ')[0])+'</small>'+l[1]+'</p>');tr.scrollTop=tr.scrollHeight;
+wv.className='wave on '+(b?'b':'c');say(l[1],b,function(){if(id!==run)return;wv.className='wave';setTimeout(function(){nx(i+1,id)},350)})}
+function fin(){act=false;$('#cs').textContent='Lead qualified';cb.textContent='Replay call';
+tr.insertAdjacentHTML('beforeend','<div class="sum">'+sc.S.map(function(r){return r[0]+': <b>'+r[1]+'</b>'}).join('<br>')+'</div>');tr.scrollTop=tr.scrollHeight}
+cb.onclick=start;$('#hear').onclick=function(){$('#con').scrollIntoView({block:'center'});if(!act)start()};
+$('#vo').onchange=function(){if(!this.checked&&SS)speechSynthesis.cancel()};
+/* stepper */
+var S=[['📞','Incoming call','<b>Amara Okafor</b> is calling<p>+1 555 014 2290, 00:24 in</p><span class="chip">Picked up by Boblo</span><span class="chip">No hold, no voicemail</span>'],
+['🧠','Boblo listens','<div class="t">Can you tell me about your services?</div><div class="t b">Happy to help. What are you looking for?</div><div class="t">A quote for three units.</div><span class="chip">Intent: quote request</span>'],
+['✅','Lead qualified','<b>Amara Okafor</b><p>Requirement: quote, three units<br>Budget: confirmed<br>Phone: +1 555 014 2290</p><span class="chip">High priority</span><span class="chip">Qualified</span>'],
+['➡️','Next action','<b>Schedule callback</b><p>Today, 4:30 PM. The summary is already with your team.</p><span class="chip">Follow-up booked</span><span class="chip">Human notified</span>']];
+var cur=0,user=false,sb=[];
+S.forEach(function(s,i){var b=document.createElement('button');b.className='step';b.innerHTML='<span>'+s[0]+'</span>'+s[1];b.onclick=function(){user=true;clr();go(i,true)};$('#st').appendChild(b);sb.push(b)});
+function clr(){sb.forEach(function(b){b.classList.remove('hint')});$('#stw').classList.add('done')}
+function go(n,snd){cur=(n+4)%4;sb.forEach(function(b,i){b.classList.toggle('a',i===cur)});$('#pg').style.width=(cur*25)+'%';var p=$('#sp');p.style.animation='none';void p.offsetWidth;p.style.animation='';p.innerHTML=S[cur][2];if(cur===0&&snd)ring(1)}
+$('#nx').onclick=function(){user=true;clr();go(cur+1,true)};$('#pv').onclick=function(){user=true;clr();go(cur-1,true)};go(0);
+var dio=new IntersectionObserver(function(e){if(e[0].isIntersecting){dio.disconnect();var k=0;(function tick(){if(user)return;go(k);sb.forEach(function(b,i){b.classList.toggle('hint',i===k)});k++;if(k<4)setTimeout(tick,2300);else setTimeout(function(){if(!user)clr()},2000)})()}},{threshold:.6});dio.observe($('#stw'));
+/* calculator */
+var shown=0;
+function calc(){var c=+$('#r1').value,d=+$('#r2').value,sp=+$('#r3').value,m=c*d;
+$('#v1').textContent=c.toLocaleString();$('#v2').textContent=d;$('#v3').textContent='$'+sp.toLocaleString();
+var pl=m<=300?['Launch',79]:m<=1500?['Growth',199]:m<=5000?['Scale',499]:null,tg=pl?Math.max(0,sp-pl[1]):0;
+$('#pl').textContent=pl?'About '+m.toLocaleString()+' minutes a month fits the '+pl[0]+' plan at $'+pl[1]+'.':'About '+m.toLocaleString()+' minutes a month is above Scale. Ask us about a custom plan.';
+var from=shown,t0=performance.now();(function f(t){var k=Math.min(1,(t-t0)/600);shown=Math.round(from+(tg-from)*k);$('#sv').textContent='$'+shown.toLocaleString()+'/mo';if(k<1)requestAnimationFrame(f)})(t0)}
+['#r1','#r2','#r3'].forEach(function(s){$(s).oninput=calc});calc();
+$('#go').onclick=function(){var v=$('#em').value;$('#msg').textContent=v.indexOf('@')>0&&v.indexOf('.')>0?'You’re in. We’ll be in touch.':'Enter a valid email so we can reach you.'};
+var fl=$('#fl');addEventListener('scroll',function(){fl.classList.toggle('s',scrollY>800&&$('#join').getBoundingClientRect().top>innerHeight)},{passive:true});
+</script></body></html>
